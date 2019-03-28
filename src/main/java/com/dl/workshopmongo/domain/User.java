@@ -2,12 +2,15 @@ package com.dl.workshopmongo.domain;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class User implements Serializable{								// p/ transformar dados em bytes
+@Document(collection="user")
+public class User implements Serializable{								// p/ transformar dados/Objetos em bytes
 	private static final long serialVersionUID = 1L;
 
  // ATRIBUTOS
-	
+	@Id
 	private String id;
 	private String name;
 	private String email;
