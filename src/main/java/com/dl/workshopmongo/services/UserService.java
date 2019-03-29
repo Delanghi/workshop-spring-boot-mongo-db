@@ -26,12 +26,20 @@ public class UserService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado")); 
 	}	
 	
-	public User insert(User obj) {									// MÉTODO p/ inserir dados
-		return repo.insert(obj);
+ // MÉTODO PARA INSERIR DADOS
+	public User insert(User obj) {														
+		return repo.insert(obj);									// tem inserção de dados no pacote deste IDE
 	}
 	
-	public User fromDTO(UserDTO objDTO) {							// este MÉTODO pega o DTO e INSTANCIA um usuário
-		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+ // MÉTODO PARA DELETAR DADOS
+	public void delete(String id) {
+		findById(id);												// p/ tratar a excessão caso o ID a ser deletado ñ exista
+		repo.deleteById(id);
+	}	
+	
+ // MÉTODO PARA PEGAR DTO E INSTANCIAR UM USUÁRIO
+	public User fromDTO(UserDTO objDTO) {											// este MÉTODO pega o DTO e INSTANCIA um usuário
+		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());		// dados da "User-list"
 	}
 	
 }
