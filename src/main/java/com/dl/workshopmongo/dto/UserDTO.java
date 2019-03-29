@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.dl.workshopmongo.domain.User;
 
 public class UserDTO implements Serializable {					// p/ transformar Objetos em bytes
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;			// número de versão padrão 
 	
 // ATRIBUTOS
 	private String id;
