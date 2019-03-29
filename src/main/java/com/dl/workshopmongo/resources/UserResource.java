@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.dl.workshopmongo.domain.Post;
 import com.dl.workshopmongo.domain.User;
 import com.dl.workshopmongo.dto.UserDTO;
 import com.dl.workshopmongo.services.UserService;
@@ -62,5 +63,12 @@ public class UserResource {
 			obj.setId(id);													// p/ garantir que o obj vai ter o mesmo ID da requisição
 			obj = service.update(obj);										// aqui executamos o update no db
 			return ResponseEntity.noContent().build();						// "noContent" resulta no código de status 204 
+		}
+
+ // MÉTODO PARA RETORNAR USUÁRIO A PARTIR DO ID (GET)
+		@RequestMapping(value="/{id}/posts", method=RequestMethod.GET)				// MÉTODO p/ retornar um usuário a partir do ID
+		public ResponseEntity<List<Post>> findPost(@PathVariable String id) {		// "@ResponseEntity" é um Endpoint
+			User obj = service.findById(id);										// vamos mandar buscar o usuário por ID
+			return ResponseEntity.ok().body(obj.getPosts());						// retorna a lista de post associada c/ o usuário
 		}
 }
