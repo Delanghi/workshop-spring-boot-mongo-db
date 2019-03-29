@@ -31,14 +31,14 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDTO);
 	}	
 	
- // MÉTODO PARA RETORNAR USUÁRIO A PARTIR DO ID
+ // MÉTODO PARA RETORNAR USUÁRIO A PARTIR DO ID (GET)
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)				// MÉTODO p/ retornar um usuário a partir do ID
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {		// "@PathVariable" p/ unir ID das linhas 35 e 36
 		User obj = service.findById(id);							
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
- // MÉTODO PARA INSERIR DADOS
+ // MÉTODO PARA INSERIR DADOS (POST)
 	@RequestMapping(method=RequestMethod.POST)								// além do "users" deve retornar tb o ID
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDTO) {		// "void" pq a inserção recebe um Objeto vazio
 		User obj = service.fromDTO(objDTO); 								// convertemos "DTO" p/ "User"
@@ -48,7 +48,7 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();							// retorna a localização do novo recurso criado
 	}	
 	
- // MÉTODO PARA DELETAR DADOS
+ // MÉTODO PARA DELETAR DADOS (DELETE)
 		@RequestMapping(value="/{id}", method=RequestMethod.DELETE)			// MÉTODO p/ retornar um usuário a partir do ID
 		public ResponseEntity<Void> delete(@PathVariable String id) {		// "Void" pq ñ espera-se que retorne nenhuma informação
 			service.delete(id);							
