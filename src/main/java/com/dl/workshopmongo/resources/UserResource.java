@@ -39,7 +39,7 @@ public class UserResource {
 	}
 	
  // MÉTODO PARA INSERIR DADOS
-	@RequestMapping(method=RequestMethod.POST)								// além do "usres" deve retornar tb o ID
+	@RequestMapping(method=RequestMethod.POST)								// além do "users" deve retornar tb o ID
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDTO) {		// "void" pq a inserção recebe um Objeto vazio
 		User obj = service.fromDTO(objDTO); 								// convertemos "DTO" p/ "User"
 		obj = service.insert(obj);											// aqui inserimos no db
@@ -49,9 +49,18 @@ public class UserResource {
 	}	
 	
  // MÉTODO PARA DELETAR DADOS
-		@RequestMapping(value="/{id}", method=RequestMethod.DELETE)				// MÉTODO p/ retornar um usuário a partir do ID
-		public ResponseEntity<Void> delete(@PathVariable String id) {			// "Void" pq ñ espera-se que retorne nenhuma informação
+		@RequestMapping(value="/{id}", method=RequestMethod.DELETE)			// MÉTODO p/ retornar um usuário a partir do ID
+		public ResponseEntity<Void> delete(@PathVariable String id) {		// "Void" pq ñ espera-se que retorne nenhuma informação
 			service.delete(id);							
-			return ResponseEntity.noContent().build();							// "noContent" resulta no código de status 204 
+			return ResponseEntity.noContent().build();						// "noContent" resulta no código de status 204 
+		}
+		
+ // MÉTODO PARA UPDATE (PUT)
+		@RequestMapping(value="/{id}", method=RequestMethod.PUT)			// aqui tem que expecificar o ID
+		public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id) {		// ter VARIÁVEL ID c/ parâmetro
+			User obj = service.fromDTO(objDTO); 							// INSTANCIAMOS o obj a partir do DTO que esta na requisição (linha 59)
+			obj.setId(id);													// p/ garantir que o obj vai ter o mesmo ID da requisição
+			obj = service.update(obj);										// aqui executamos o update no db
+			return ResponseEntity.noContent().build();						// "noContent" resulta no código de status 204 
 		}
 }
