@@ -21,6 +21,7 @@ public class UserService {
 		return repo.findAll();									// MÉTODO que retorna todos os dados do Tipo User
 	}
 	
+ // MÉTODO DE PROCURA POR ID
 	public User findById(String id) {							// aqui se ñ existir o usuário do ID pedido, irá retornar nulo
 		Optional<User> obj = repo.findById(id);  
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado")); 

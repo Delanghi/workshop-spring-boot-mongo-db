@@ -1,12 +1,15 @@
 package com.dl.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.dl.workshopmongo.dto.AuthorDTO;
+import com.dl.workshopmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable {							// p/ transformar dados em bytes		
@@ -19,6 +22,8 @@ public class Post implements Serializable {							// p/ transformar dados em byt
 	private String title;
 	private String body;
 	private AuthorDTO author;
+	
+	private List<CommentDTO> comments = new ArrayList<>();			// lista de comentários
 	
  // ASSOCIAÇÕES
 	
@@ -66,6 +71,12 @@ public class Post implements Serializable {							// p/ transformar dados em byt
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
 	}
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
+	}
 	
  // HASHCODE & EQUALS
 	@Override
@@ -92,4 +103,6 @@ public class Post implements Serializable {							// p/ transformar dados em byt
 			return false;
 		return true;
 	}
+
+	
 }
